@@ -1,10 +1,20 @@
 import { getCollections } from "@/lib/actions/actions";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Collections = async () => {
-  const collections = await getCollections();
+const Collections = () => {
+  const [collections, setCollections] = useState([]);
+
+  useEffect(() => {
+    const fetchCollections = async () => {
+      const result = await getCollections();
+      setCollections(result);
+    };
+
+    fetchCollections();
+  }, []);
+
   return (
     <div className="flex flex-col items-center gap-10 py-8 px-5">
       <p className="text-heading1-bold">Collections</p>
