@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Granaina Store
 
-## Getting Started
+This is a Next.js project for an online store with user authentication, shopping cart, stripe checkout, wishlists, collections and orders.
 
-First, run the development server:
+Live:
+https://granaina-store.vercel.app
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+All the displayed data shown in the store is managed by an Admin dashboard: https://github.com/MatiasRZ7/admingranaina
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
+Libraries Used:
 
-To learn more about Next.js, take a look at the following resources:
+This project uses several libraries to provide its functionality:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Next.js for the web framework.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+React for building the user interface.
 
-## Deploy on Vercel
+Mongoose for object modeling with MongoDB.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Stripe for payment processing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Zustand for state management.
+
+lucide-react for icons.
+
+react-hot-toast for notifications.
+
+tailwind-scrollbar-hide for custom scrollbar styling.
+
+Tailwind CSS for styling.
+
+
+![store1](https://github.com/MatiasRZ7/granaina_store/assets/160002289/8f9e6919-3262-4996-8938-403c9da56335)
+
+
+![store2](https://github.com/MatiasRZ7/granaina_store/assets/160002289/d9f68389-bb3f-4882-a3e2-3f90ac022e50)
+
+![store3](https://github.com/MatiasRZ7/granaina_store/assets/160002289/0ee58a30-b51c-4d81-aa8e-d21e8136dc7e)
+
+![store4](https://github.com/MatiasRZ7/granaina_store/assets/160002289/1861e021-b4c9-4a3f-a168-5dab0ce04e43)
+
+![store5](https://github.com/MatiasRZ7/granaina_store/assets/160002289/8bae7f06-1a58-4f79-913f-a05fde818c7d)
+
+
+
+
