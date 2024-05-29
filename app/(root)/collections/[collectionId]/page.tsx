@@ -17,7 +17,7 @@ const CollectionDetails = async ({
         width={1500}
         height={1000}
         alt="collection"
-        className="w-full h-[400px] object-cover rounded-xl"
+        className="w-full h-[480px] object-contain rounded-xl"
       />
       <p className="text-heading3-bold text-grey-2">
         {collectionDetails.title}
@@ -25,7 +25,7 @@ const CollectionDetails = async ({
       <p className="text-body-normal text-center max-w-[900px] text-grey-2">
         {collectionDetails.description}
       </p>
-      <div className="flex flex-wrap gap-16 mx-auto">
+      <div className="flex flex-wrap gap-16 mx-auto justify-center">
         {collectionDetails.products.map((product: ProductType) => (
           <ProductCard key={product._id} product={product} />
         ))}

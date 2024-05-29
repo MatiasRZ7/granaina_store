@@ -22,13 +22,13 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         <HeartFavorite product={productInfo} />
       </div>
       <div className="flex gap-2">
-        <p className="text-base-medium text-grey-2">Category:</p>
+        <p className="text-base-medium text-grey-2">Categoria:</p>
         <p className="text-base-bold">{productInfo.category}</p>
       </div>
       <p className="text-heading3-bold">${productInfo.price}</p>
 
       <div className="flex flex-col gap-2">
-        <p className="text-base-medium text-grey-2">Description</p>
+        <p className="text-base-medium text-grey-2">Descripcion:</p>
         <p className="text-small-medium">{productInfo.description}</p>
       </div>
 
@@ -70,7 +70,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         </div>
       )}
       <div className="flex gap-2">
-        <p className="text-base-medium text-grey-2">Quantity:</p>
+        <p className="text-base-medium text-grey-2">Personas:</p>
         <div className="flex gap-4 items-center select-none">
           <MinusCircle
             className="hover:text-red-1 cursor-pointer"
@@ -84,7 +84,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         </div>
       </div>
       <button
-        className="outline text-base-bold py-3 rounded-lg hover:bg-black hover:text-white"
+        className="outline text-base-bold py-3 rounded-lg hover:bg-verde-fuerte hover:text-white transition-all duration-300 ease-in-out"
         onClick={() => {
           cart.addItem({
             item: productInfo,

@@ -5,7 +5,7 @@ import React, { useState } from "react";
 const Gallery = ({ productMedia }: { productMedia: string[] }) => {
   const [mainImage, setMainImage] = useState(productMedia[0]);
   return (
-    <div className="flex flex-col gap-3 max-w-[500px]">
+    <div className="flex flex-col items-center gap-3 max-w-[500px]">
       <Image
         src={mainImage}
         width={500}

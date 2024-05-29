@@ -7,3 +7,6 @@ body,
 :root {
   height: 100%;
 }
+body {
+  background-color: #F0F9FA;
+}

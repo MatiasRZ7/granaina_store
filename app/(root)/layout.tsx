@@ -7,8 +7,9 @@ import ToasterProvider from "@/lib/providers/ToasterProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "La Granaina - Store",
-  description: "Granaina E commerce store",
+  title: "Riviera Maya Tour",
+  description: "Tours en la Riviera Maya, México",
+  keywords: "Riviera Maya, México, Tours, Excursiones, Vacaciones, Turismo Ecológico",
 };
 
 export default function RootLayout({
@@ -18,6 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logofav.ico" />
+      </head>
       <body className={inter.className}>
         <ClerkProvider>
           <ToasterProvider />

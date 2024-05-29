@@ -44,7 +44,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="flex gap-20 py-16 px-10 max-lg:flex-col">
+    <div className="flex gap-20 py-36 px-10 max-lg:flex-col">
       <div className="w-2/3 max-lg:w-full">
         <p className="text-heading3-bold">Shopping Cart</p>
         <hr className="my-6" />
@@ -53,7 +53,10 @@ const Cart = () => {
         ) : (
           <div>
             {cart.cartItems.map((cartItem) => (
-              <div className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-grey-1 px-6 py-5 items-center max-sm:items-start justify-between">
+              <div
+                className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-verde-claro px-6 py-5 items-center max-sm:items-start justify-between
+               transition-all duration-300 ease-in-out"
+              >
                 <div className="flex items-center">
                   <Image
                     width={100}
@@ -96,7 +99,7 @@ const Cart = () => {
         )}
       </div>
 
-      <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-grey-1 rounded-lg px-4 py-5">
+      <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-verde-claro rounded-lg px-4 py-5">
         <p className="text-heading4-bold pb-4">
           Summary{" "}
           <span>{`(${cart.cartItems.length} ${
@@ -108,9 +111,9 @@ const Cart = () => {
           <span>${totalRounded}</span>
         </div>
         <button
-          className="border rounded-lg text-body-bold bg-white py-3 w-full hover:bg-black
-         hover:text-white"
-         onClick={handleCheckout}
+          className="border rounded-lg text-body-bold bg-white py-3 w-full
+         hover:bg-verde-fuerte hover:text-white transition-all duration-300 ease-in-out"
+          onClick={handleCheckout}
         >
           Proceed to Checkout
         </button>

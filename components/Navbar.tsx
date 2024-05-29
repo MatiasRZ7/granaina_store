@@ -15,13 +15,15 @@ const Navbar = () => {
   const cart = useCart();
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [query, setQuery] = useState("");
+
+  const isProductPage = pathname.includes('products/');
   return (
-    <div className="sticky top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-white max-sm:px-2">
+    <div className={`${isProductPage ? 'relative' : 'sticky'} top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-gradient-to-r from-amarillo to-verde-claro max-sm:px-2`}>
       <Link href="/">
         <Image
-          src="/logo.png"
-          alt="Logo La Granaina"
-          width={200}
+          src="/LOGO 3 (2).png"
+          alt="Logo Riviera maya tour"
+          width={100}
           height={120}
         />
       </Link>
@@ -54,7 +56,7 @@ const Navbar = () => {
 
       <div className="flex gap-3 border border-grey-2 px-3 py-1 items-center rounded-lg">
         <input
-          className="outline-none max-sm:max-w-[120px]"
+          className="outline-none max-sm:max-w-[120px] bg-claro-crema rounded"
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
