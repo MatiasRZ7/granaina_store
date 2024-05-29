@@ -43,7 +43,6 @@ const useCart = create(
           size,
           dateAdded,
         };
-        console.log(newItem); // Log the new item
         set({
           cartItems: [
             // ...currentItems means to keep the current items in the cart
