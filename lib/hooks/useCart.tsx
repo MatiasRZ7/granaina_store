@@ -8,6 +8,7 @@ interface CartItem {
   quantity: number;
   color?: string; // ? means optional
   size?: string;
+  dateAdded?: Date;
 }
 
 // CartStore is the type of the store
@@ -26,7 +27,7 @@ const useCart = create(
       cartItems: [], // initial value of the cart
       // function to add an item to the cart with the initial value of the cart
       addItem: (data: CartItem) => {
-        const { item, quantity, color, size } = data;
+        const { item, quantity, color, size, dateAdded } = data;
         const currentItems = get().cartItems; // get the current items in the cart
         const isExisting = currentItems.find(
           (cartItem) => cartItem.item._id === item._id
@@ -35,17 +36,20 @@ const useCart = create(
           return toast("Item already in cart", { icon: "🛒" });
         }
         // if the item is not in the cart, add it to the cart
+        const newItem = {
+          item,
+          quantity,
+          color,
+          size,
+          dateAdded,
+        };
+        console.log(newItem); // Log the new item
         set({
           cartItems: [
             // ...currentItems means to keep the current items in the cart
             ...currentItems,
             // add the new item to the cart
-            {
-              item,
-              quantity,
-              color,
-              size,
-            },
+            newItem,
           ],
         });
         toast.success("Item added to cart", { icon: "🛒" });

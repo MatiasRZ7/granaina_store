@@ -2,6 +2,7 @@ import { getProductsDetails, getRelatedProducts } from "@/lib/actions/actions";
 import Gallery from "@/components/Gallery";
 import ProductInfo from "@/components/ProductInfo";
 import ProductCard from "@/components/ProductCard";
+import Calendario from "@/components/Calendario";
 
 const ProductDetails = async ({
   params,

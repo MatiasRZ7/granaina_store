@@ -54,6 +54,7 @@ const Cart = () => {
           <div>
             {cart.cartItems.map((cartItem) => (
               <div
+                key={cartItem.item._id}
                 className="w-full flex max-sm:flex-col max-sm:gap-3 hover:bg-verde-claro px-6 py-5 items-center max-sm:items-start justify-between
                transition-all duration-300 ease-in-out"
               >
