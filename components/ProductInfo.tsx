@@ -94,16 +94,18 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
         <button
           className="outline text-sm py-2 px-2 w-40 rounded-lg hover:bg-verde-fuerte hover:text-white transition-all duration-300 ease-in-out"
           onClick={() => {
-            cart.addItem({
-              item: productInfo,
-              quantity,
-              color: selectedColor,
-              size: selectedSize,
-              dateAdded: selectedDate,
-            });
-            setTimeout(() => {
-              router.push("/cart");
-            }, 1000);
+            if (selectedDate) {
+              cart.addItem({
+                item: productInfo,
+                quantity,
+                color: selectedColor,
+                size: selectedSize,
+                dateAdded: selectedDate,
+              });
+              setTimeout(() => {
+                router.push("/cart");
+              }, 1000);
+            }
           }}
         >
           Add to Cart
