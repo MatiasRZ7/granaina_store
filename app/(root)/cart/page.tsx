@@ -16,8 +16,10 @@ const Cart = () => {
     (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity,
     0
   );
+  // calculate 10% of the total
+  const totalTenPercent = total * 0.1;
   // round the subtotal to 2 decimal places
-  const totalRounded = parseFloat(total.toFixed(2));
+  const totalRounded = parseFloat(totalTenPercent.toFixed(2));
   const customer = {
     clerkId: user?.id,
     email: user?.emailAddresses[0].emailAddress,
@@ -33,7 +35,7 @@ const Cart = () => {
         // get the response from the checkout API
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
           method: "POST",
-          body: JSON.stringify({ cartItems: cart.cartItems, customer }),
+          body: JSON.stringify({ cartItems: cart.cartItems, customer, total: totalRounded }),
         });
         const data = await res.json();
         window.location.href = data.url;
@@ -74,6 +76,12 @@ const Cart = () => {
                     {cartItem.size && (
                       <p className="text-small-medium">{cartItem.size}</p>
                     )}
+                    {cartItem.dateAdded && (
+                      <p className="text-small-medium">
+                        Tour el dia:{" "}
+                        {new Date(cartItem.dateAdded).toLocaleDateString()}
+                      </p>
+                    )}
                     <p className="text-small-medium">${cartItem.item.price}</p>
                   </div>
                 </div>
@@ -108,7 +116,7 @@ const Cart = () => {
           })`}</span>
         </p>
         <div className="flex justify-between text-body-semibold">
-          <span>Total Amount</span>
+          <span>Monto a pagar:</span>
           <span>${totalRounded}</span>
         </div>
         <button
@@ -118,6 +126,10 @@ const Cart = () => {
         >
           Proceed to Checkout
         </button>
+        <div className="flex justify-between text-small-bold py-16">
+          <span>Se cobrará el 10% como concepto de reserva.</span>
+          
+        </div>
       </div>
     </div>
   );

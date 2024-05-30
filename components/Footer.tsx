@@ -1,7 +1,7 @@
 import { LocalPhone, Email } from "@mui/icons-material";
 import Image from "next/image";
 import Alerta from "./Alerta";
-
+import { FaWhatsapp } from "react-icons/fa";
 const Footer = () => {
   return (
     <div className="flex flex-col md:flex-row justify-between items-center gap-12 p-2 lg:p-8">
@@ -38,11 +38,13 @@ const Footer = () => {
       </div>
       <Alerta />
       <div className="max-w-xs shadow-md rounded p-3">
-        <h3 className="mb-5">Contact</h3>
-        <div className="flex">
-          <LocalPhone />
-          <p className="ml-5 mb-4">+49 234 567 1890</p>
-        </div>
+        <h3 className="mb-5 text-center">Contact</h3>
+        <a href="tel:+529841364144">
+          <div className="flex text-lg">
+            <FaWhatsapp size={30} />
+            <p className="ml-5 mb-4">+52 984 136 4144</p>
+          </div>
+        </a>
         <div className="flex">
           <Email />
           <p className="ml-5 mb-4">rentaldream@support.com</p>

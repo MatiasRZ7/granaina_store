@@ -11,7 +11,7 @@ export default function Home() {
     <div>
       <div className="relative">
         <Image
-          src={"/Rivieratexto.png"}
+          src={"/VIVE.png"}
           alt="banner"
           height={800}
           width={1350}

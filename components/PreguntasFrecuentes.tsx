@@ -14,7 +14,7 @@ const PreguntasFrecuentes = () => {
         </span>{" "}
         de Excursiones en Riviera Maya Tour
       </h1>
-      <div className="flex items-center justify-center pl-10">
+      <div className="flex items-center justify-center pl-5">
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Accordion type="single" collapsible>
@@ -47,7 +47,7 @@ const PreguntasFrecuentes = () => {
               </AccordionItem>
               <AccordionItem value="item-3">
                 <AccordionTrigger>
-                  Seguro de viaje: ¿Es necesario contratarlo?
+                  El seguro de viaje: ¿Será necesario contratarlo?
                 </AccordionTrigger>
                 <AccordionContent>
                   No existe ninguna obligatoriedad por parte de ninguna

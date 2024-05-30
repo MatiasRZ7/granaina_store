@@ -4,6 +4,7 @@ import { Calendar } from "@/components/ui/calendar";
 import HeartFavorite from "./HeartFavorite";
 import { MinusCircle, PlusCircle } from "lucide-react";
 import useCart from "@/lib/hooks/useCart";
+import { useRouter } from "next/navigation";
 
 const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
   const [selectedColor, setSelectedColor] = useState<string>(
@@ -20,7 +21,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
       setSelectedDate(date);
     }
   };
-
+  const router = useRouter();
   return (
     <div className="sm:flex sm:justify-between">
       <div className="max-w-[400px] flex flex-col gap-4 sm:mr-16">
@@ -100,21 +101,27 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
               size: selectedSize,
               dateAdded: selectedDate,
             });
+            setTimeout(() => {
+              router.push("/cart");
+            }, 1000);
           }}
         >
           Add to Cart
         </button>
       </div>
-      <div className="sm:ml-4">
+      <div className="sm:ml-4 mb-2">
         <Calendar
           mode="single"
           selected={selectedDate}
           onSelect={handleDateSelect}
           className="rounded-lg border"
+          selectedDateStyle="bg-verde-claro text-black"
         />
         {selectedDate && (
-          <p className="underline justify-center items-center flex">
-            Fecha seleccionada: {selectedDate.toLocaleDateString()}
+          <p className="justify-center items-center flex">
+            <div className="bg-verde-claro rounded-md shadow-lg border-black border-2 py-1 px-1">
+              Fecha seleccionada: {selectedDate.toLocaleDateString()}
+            </div>
           </p>
         )}
       </div>
