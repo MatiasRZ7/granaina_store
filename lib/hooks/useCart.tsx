@@ -8,7 +8,7 @@ interface CartItem {
   quantity: number;
   color?: string; // ? means optional
   size?: string;
-  dateAdded?: Date;
+  dateAdded?: Date | string;
 }
 
 // CartStore is the type of the store
@@ -41,7 +41,8 @@ const useCart = create(
           quantity,
           color,
           size,
-          dateAdded,
+          dateAdded:
+            dateAdded instanceof Date ? dateAdded.toISOString() : dateAdded,
         };
         set({
           cartItems: [
