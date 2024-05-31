@@ -8,7 +8,7 @@ interface CartItem {
   quantity: number;
   color?: string; // ? means optional
   size?: string;
-  dateAdded?: Date | string;
+  dateAdded: string;
 }
 
 // CartStore is the type of the store
@@ -36,13 +36,13 @@ const useCart = create(
           return toast("Item already in cart", { icon: "🛒" });
         }
         // if the item is not in the cart, add it to the cart
+        
         const newItem = {
           item,
           quantity,
           color,
           size,
-          dateAdded:
-            dateAdded instanceof Date ? dateAdded.toISOString() : dateAdded,
+          dateAdded,
         };
         set({
           cartItems: [
