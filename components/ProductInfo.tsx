@@ -100,7 +100,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
                 quantity,
                 color: selectedColor,
                 size: selectedSize,
-                dateAdded: selectedDate.toISOString(),
+                dateAdded: selectedDate,
               });
               setTimeout(() => {
                 router.push("/cart");
