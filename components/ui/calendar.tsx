@@ -9,6 +9,7 @@ import { buttonVariants } from "@/components/ui/button"
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
   selectedDateStyle?: string;
+  productInfo?: string;
 }
 
 function Calendar({
@@ -16,12 +17,21 @@ function Calendar({
   classNames,
   showOutsideDays = true,
   selectedDateStyle,
+  productInfo,
   ...props
 }: CalendarProps) {
   return (
     <DayPicker
       showOutsideDays={showOutsideDays}
       className={cn("p-3", className)}
+      disabled={(date) => {
+        // Disable Monday for specific product
+        if (productInfo === "TULUM + CENOTE + YALKU(LAGUNA)" && date.getDay() === 1) {
+          return true;
+        }
+        // Disable Saturday and Sunday for all products
+        return date.getDay() === 0 || date.getDay() === 6;
+      }}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",

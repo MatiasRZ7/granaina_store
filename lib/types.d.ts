@@ -19,6 +19,9 @@ type ProductType = {
   colors: [string];
   createdAt: string;
   updatedAt: string;
+  metadata: {
+    dateAdded: string;
+  };
 };
 
 type UserType = {

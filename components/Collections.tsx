@@ -6,10 +6,11 @@ const Collections = async () => {
   const collections = await getCollections();
 
   const logos = [
-    "/RIO LAGARTO LOGO.png",
+    "/TULUM AKUMAL LOGO.png",
     "/ISLAS LOGO.png",
     "/CHICHEN LOGO.png",
     "/CENOTES LOGO.png",
+    
   ];
 
   return (

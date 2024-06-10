@@ -1,10 +1,29 @@
+"use client"
 import ProductCard from "@/components/ProductCard";
 import { getSearchedProducts } from "@/lib/actions/actions";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Loader from "@/components/Loader";
 
-const SearchPage = async ({ params }: { params: { query: string } }) => {
- const searchedProducts = await getSearchedProducts(params.query);  
+const SearchPage = ({ params }: { params: { query: string } }) => {
+  const [searchedProducts, setSearchedProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
   const decodedQuery = decodeURIComponent(params.query);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getSearchedProducts(params.query)
+      .then((products) => {
+        setSearchedProducts(products);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [params.query]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div className="px-10 py-5">
       <p className="text-heading3-bold my-10">

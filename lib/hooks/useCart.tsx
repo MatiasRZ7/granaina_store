@@ -6,9 +6,12 @@ import { persist, createJSONStorage } from "zustand/middleware";
 interface CartItem {
   item: ProductType;
   quantity: number;
-  color?: string; // ? means optional
+  childrenQuantity?: number;
+  color?: string;
   size?: string;
-  dateAdded?: Date;
+  dateAdded: string;
+  hotelName?: string;
+  pickupTime?: string;
 }
 
 // CartStore is the type of the store
@@ -18,7 +21,10 @@ interface CartStore {
   removeItem: (idToRemove: string) => void;
   increaseQuantity: (idToIncrease: string) => void;
   decreaseQuantity: (idToDecrease: string) => void;
+  increaseChildrenQuantity: (idToIncrease: string) => void;
+  decreaseChildrenQuantity: (idToDecrease: string) => void;
   clearCart: () => void;
+  getTotal: () => number;
 }
 // create a store for the cart
 const useCart = create(
@@ -27,7 +33,8 @@ const useCart = create(
       cartItems: [], // initial value of the cart
       // function to add an item to the cart with the initial value of the cart
       addItem: (data: CartItem) => {
-        const { item, quantity, color, size, dateAdded } = data;
+        const { item, quantity, childrenQuantity, color, size, dateAdded, hotelName, pickupTime } = data;
+        console.log('Adding item to cart:', data);
         const currentItems = get().cartItems; // get the current items in the cart
         const isExisting = currentItems.find(
           (cartItem) => cartItem.item._id === item._id
@@ -40,9 +47,19 @@ const useCart = create(
           item,
           quantity,
           color,
+          childrenQuantity,
           size,
           dateAdded,
+          hotelName,
+          pickupTime,
         };
+         // Check if dateAdded is defined
+         if (newItem.dateAdded) {
+          console.log("dateAdded is of type:", typeof newItem.dateAdded);
+          console.log(newItem.dateAdded);
+        } else {
+          console.log("dateAdded is not defined");
+        }
         set({
           cartItems: [
             // ...currentItems means to keep the current items in the cart
@@ -78,19 +95,41 @@ const useCart = create(
         toast.success("Item quantity increased");
       },
       decreaseQuantity: (idToDecrease: String) => {
-        // decrease the quantity of the item with the given id
         const newCartItems = get().cartItems.map((cartItem) =>
-          // if the item id is the same as the given id, decrease the quantity
           cartItem.item._id === idToDecrease
-            ? { ...cartItem, quantity: cartItem.quantity - 1 }
+            ? { ...cartItem, quantity: Math.max(0, cartItem.quantity - 1) }
+            : cartItem
+        );
+        set({ cartItems: newCartItems.filter(item => item.quantity > 0) });
+        toast.success("Item quantity decreased");
+      },
+      increaseChildrenQuantity: (idToIncrease: String) => {
+        const newCartItems = get().cartItems.map((cartItem) =>
+          cartItem.item._id === idToIncrease
+            ? { ...cartItem, childrenQuantity: (cartItem.childrenQuantity || 0) + 1 }
             : cartItem
         );
         set({ cartItems: newCartItems });
-        toast.success("Item quantity decreased");
+        toast.success("Children quantity increased");
+      },
+      decreaseChildrenQuantity: (idToDecrease: String) => {
+        const newCartItems = get().cartItems.map((cartItem) =>
+          cartItem.item._id === idToDecrease
+            ? { ...cartItem, childrenQuantity: Math.max(0, (cartItem.childrenQuantity || 0) - 1) }
+            : cartItem
+        );
+        set({ cartItems: newCartItems.filter(item => item.quantity > 0 || (item.childrenQuantity || 0) > 0) });
+        toast.success("Children quantity decreased");
       },
       // clear the cart
       clearCart: () => {
         set({ cartItems: [] });
+      },
+      getTotal: () => {
+        return get().cartItems.reduce(
+          (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity + (cartItem.childrenQuantity || 0) * (cartItem.item.price - 10),
+          0
+        );
       },
     }),
     // store the cart in the local storage

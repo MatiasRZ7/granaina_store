@@ -10,16 +10,11 @@ const Cart = () => {
   const router = useRouter();
   const { user } = useUser();
   const cart = useCart();
-  // calculate the subtotal of the cart
-  const total = cart.cartItems.reduce(
-    // acc is the "saved" value, cartItem is the current item in the loop, 0 is the initial value of acc
-    (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity,
-    0
-  );
-  // calculate 10% of the total
-  const totalTenPercent = total * 0.1;
+  const total = cart.getTotal();
+  // calculate 50% of the total
+  const totalfiftyPercent = total * 0.5;
   // round the subtotal to 2 decimal places
-  const totalRounded = parseFloat(totalTenPercent.toFixed(2));
+  const totalRounded = parseFloat(totalfiftyPercent.toFixed(2));
   const customer = {
     clerkId: user?.id,
     email: user?.emailAddresses[0].emailAddress,
@@ -32,10 +27,20 @@ const Cart = () => {
       if (!user) {
         router.push("/sign-in");
       } else {
+        console.log({
+          cartItems: cart.cartItems,
+          customer,
+          total: totalRounded,
+        });
+        debugger; // Pause execution here
         // get the response from the checkout API
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
           method: "POST",
-          body: JSON.stringify({ cartItems: cart.cartItems, customer, total: totalRounded }),
+          body: JSON.stringify({
+            cartItems: cart.cartItems,
+            customer,
+            total: totalRounded,
+          }),
         });
         const data = await res.json();
         window.location.href = data.url;
@@ -95,7 +100,22 @@ const Cart = () => {
                   <PlusCircle
                     className="hover:text-red-1 cursor-pointer"
                     onClick={() => cart.increaseQuantity(cartItem.item._id)}
+                  />{" "}
+                  (Adultos)
+                  <MinusCircle
+                    className="hover:text-red-1 cursor-pointer"
+                    onClick={() =>
+                      cart.decreaseChildrenQuantity(cartItem.item._id)
+                    }
                   />
+                  <p className="text-body-bold">{cartItem.childrenQuantity}</p>
+                  <PlusCircle
+                    className="hover:text-red-1 cursor-pointer"
+                    onClick={() =>
+                      cart.increaseChildrenQuantity(cartItem.item._id)
+                    }
+                  />{" "}
+                  (Niños)
                 </div>
 
                 <Trash
@@ -127,8 +147,7 @@ const Cart = () => {
           Proceed to Checkout
         </button>
         <div className="flex justify-between text-small-bold py-16">
-          <span>Se cobrará el 10% como concepto de reserva.</span>
-          
+          <span>Se cobrará el 50% como concepto de reserva.</span>
         </div>
       </div>
     </div>

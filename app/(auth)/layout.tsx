@@ -6,7 +6,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Granaina - Store Auth",
+  title: "Riviera Maya Tour - Auth",
   description: "Next.js Ecommerce store",
 };
 

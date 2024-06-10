@@ -16,9 +16,13 @@ const Navbar = () => {
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [query, setQuery] = useState("");
 
-  const isProductPage = pathname.includes('products/');
+  const isProductPage = pathname.includes("products/");
   return (
-    <div className={`${isProductPage ? 'relative' : 'sticky'} top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-gradient-to-r from-amarillo to-verde-claro max-sm:px-2`}>
+    <div
+      className={`${
+        isProductPage ? "relative" : "sticky"
+      } top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-gradient-to-r from-amarillo to-verde-claro max-sm:px-2`}
+    >
       <Link href="/">
         <Image
           src="/LOGO 3 (2).png"
@@ -30,9 +34,7 @@ const Navbar = () => {
       <div className="flex gap-4 text-base-bold max-lg:hidden">
         <Link
           href="/"
-          className={`hover:text-red-1 ${
-            pathname === "/" && "text-red-1"
-          }`}
+          className={`hover:text-red-1 ${pathname === "/" && "text-red-1"}`}
         >
           Home
         </Link>
@@ -60,6 +62,12 @@ const Navbar = () => {
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && query !== "") {
+              router.push(`/search/${query}`);
+              setQuery("");
+            }
+          }}
         />
         <button
           disabled={query === ""}

@@ -14,8 +14,8 @@ const PreguntasFrecuentes = () => {
         </span>{" "}
         de Excursiones en Riviera Maya Tour
       </h1>
-      <div className="flex items-center justify-center pl-5">
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="flex items-center justify-center ml-5 mr-5">
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-12">
           <div>
             <Accordion type="single" collapsible>
               <AccordionItem value="item-1">
@@ -33,8 +33,7 @@ const PreguntasFrecuentes = () => {
               </AccordionItem>
               <AccordionItem value="item-2">
                 <AccordionTrigger>
-                  ¿Es recomendable usar protector solar y antimosquitos
-                  biodegradable en México?
+                  ¿Es recomendable usar protector solar biodegradable en México?
                 </AccordionTrigger>
                 <AccordionContent>
                   Si, en algunos espacios son muy estrictos. Además, México está
@@ -103,7 +102,7 @@ const PreguntasFrecuentes = () => {
               <AccordionItem value="item-7">
                 <AccordionTrigger>
                   Visado para viajar como turista a México con pasaporte
-                  español: ¿Es obligatorio?
+                  español, ¿Obligatorio?
                 </AccordionTrigger>
                 <AccordionContent>
                   Según la información disponible en el Ministerio de Asuntos
