@@ -39,7 +39,7 @@ export default function Footer() {
             </div>
             <div className="flex sm:items-center sm:justify-center md:items-start md:justify-start  mt-3">
               <a
-                href="https://wa.me/529841364144?text=Hola%20Riviera%20Maya%20Tour,%20me%20gustaria%20preguntar%20sobre%20el%20%20tour..."
+                href="https://wa.me/529842079149?text=Hola%20Riviera%20Maya%20Tour,%20me%20gustaria%20preguntar%20sobre%20el%20%20tour..."
                 title="WhatsApp"
                 target="_blank"
                 rel="nofollow"
