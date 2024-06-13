@@ -6,6 +6,7 @@ import React from "react";
 const Orders = async () => {
   const { userId } = auth();
   const orders = await getOrders(userId as string);
+  console.log(orders);
   return (
     <div className="px-10 py-5 max-sm:px-3">
       <p className="text-heading3-bold my-10 ">Your Orders</p>
@@ -34,36 +35,52 @@ const Orders = async () => {
                   />
                   <div className="flex flex-col justify-between">
                     <p className="text-small-medium">
-                      Title:{" "}
+                      Tour:{" "}
                       <span className="text-small-bold">
                         {orderItem.product.title}
                       </span>
                     </p>
-                    {orderItem.color && (
-                      <p className="text-small-medium">
-                        Color:{" "}
-                        <span className="text-small-bold">
-                          {orderItem.color}
-                        </span>
-                      </p>
-                    )}
-                    {orderItem.size && (
-                      <p className="text-small-medium">
-                        Size:{" "}
-                        <span className="text-small-bold">
-                          {orderItem.size}
-                        </span>
-                      </p>
-                    )}
                     <p className="text-small-medium">
-                      Unit price:{" "}
+                      Precio Adulto tour:{" "}
                       <span className="text-small-bold">${orderItem.product.price}</span>
                     </p>
 
                     <p className="text-small-medium">
-                      Quantity:{" "}
+                      Cantidad:{" "}
                       <span className="text-small-bold">{orderItem.quantity}</span>
                     </p>
+                    {order.dateAdded && (
+                      <p className="text-small-medium">
+                        Fecha del Tour:{" "}
+                        <span className="text-small-bold">
+                          {new Date(order.dateAdded).toLocaleDateString()}
+                        </span>
+                      </p>
+                    )}
+                    {order.hotelName && (
+                      <p className="text-small-medium">
+                        Nombre del hotel:{" "}
+                        <span className="text-small-bold">
+                          {order.hotelName}
+                        </span>
+                      </p>
+                    )}
+                    {order.childrenQuantity && (
+                      <p className="text-small-medium">
+                        Cantidad niños:{" "}
+                        <span className="text-small-bold">
+                          {order.childrenQuantity}
+                        </span>
+                      </p>
+                    )}
+                    {order.adultQuantity && (
+                      <p className="text-small-medium">
+                        Cantidad adultos:{" "}
+                        <span className="text-small-bold">
+                          {order.adultQuantity}
+                        </span>
+                      </p>
+                    )}
                   </div>
                 </div>
               ))}

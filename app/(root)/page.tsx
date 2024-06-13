@@ -44,6 +44,15 @@ export default function Home() {
         <ImagenesCarousel />
         <PreguntasFrecuentes />
       </div>
+      <div className="flex items-center justify-center mt-5 mb-2">
+        <Image
+          src={"/rivieramayatour.png"}
+          alt="RivieraTexto"
+          height={800}
+          width={1350}
+          className="z-0 shadow-lg border"
+        />
+      </div>
       <Footer />
     </div>
   );

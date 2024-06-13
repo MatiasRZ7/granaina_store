@@ -6,8 +6,10 @@ import { MinusCircle, PlusCircle } from "lucide-react";
 import useCart from "@/lib/hooks/useCart";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Alerta2 from "./Alerta2";
 
 const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
+  const [showInfo, setShowInfo] = useState(false);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
@@ -32,6 +34,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
     }
   };
   const [childrenQuantity, setChildrenQuantity] = useState<number>(0);
+  const [adultQuantity, setAdultQuantity] = useState<number>(0);
   const cart = useCart();
   const handleDateSelect = (date: Date | undefined, event?: any) => {
     if (date) {
@@ -55,7 +58,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
   };
   const router = useRouter();
   return (
-    <div className="sm:flex sm:justify-between">
+    <div className="flex flex-col sm:flex-row justify-between">
       <div className="max-w-[400px] flex flex-col gap-4 sm:mr-16 py-2">
         <div className="flex justify-between items-center">
           <p className="text-heading3-bold">{productInfo.title}</p>
@@ -109,22 +112,28 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
             </div>
           </div>
         )}
-        <div className="flex gap-2">
+        <div className="flex gap-2 cursor-pointer">
           <p className="text-base-medium text-grey-2">Adultos:</p>
           <div className="flex gap-4 items-center select-none">
             <MinusCircle
               className="hover:text-red-1 cursor-pointer"
-              onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+              onClick={() =>
+                adultQuantity > 0 && setAdultQuantity(adultQuantity - 1)
+              }
             />
-            <p className="text-body-bold">{quantity}</p>
+            <p className="text-body-bold">{adultQuantity}</p>
             <PlusCircle
               className="hover:text-red-1 cursor-pointer"
-              onClick={() => setQuantity(quantity + 1)}
+              onClick={() => setAdultQuantity(adultQuantity + 1)}
             />
           </div>
         </div>
-        <div className="flex gap-2">
-          <p className="text-base-medium text-grey-2">Niños: (0-3 años)</p>
+        <div
+          className="flex gap-2 cursor-pointer relative"
+          onMouseEnter={() => setShowInfo(true)}
+          onMouseLeave={() => setShowInfo(false)}
+        >
+          <p className="text-base-medium text-grey-2">Niños: (4-12 años)</p>
           <div className="flex gap-4 items-center select-none">
             <MinusCircle
               className="hover:text-red-1 cursor-pointer"
@@ -144,15 +153,20 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
           className="outline text-sm py-2 px-2 w-40 rounded-lg hover:bg-verde-fuerte hover:text-white transition-all duration-300 ease-in-out"
           onClick={() => {
             if (selectedDate && hotelName && hotelName.length > 5) {
-              cart.addItem({
+              const newItem = {
                 item: productInfo,
                 quantity,
                 childrenQuantity,
+                adultQuantity,
                 color: selectedColor ? selectedColor : undefined,
                 size: selectedSize ? selectedSize : undefined,
                 dateAdded: new Date(selectedDate).toISOString(),
                 hotelName: hotelName,
-              });
+              };
+              console.log("Cart contents before adding item:", cart.cartItems);
+              cart.addItem(newItem);
+              console.log("Item added:", newItem);
+              console.log("Cart contents after adding item:", cart.cartItems);
               setTimeout(() => {
                 router.push("/cart");
               }, 1000);
@@ -239,31 +253,33 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
             return false;
           }}
         />
-      <div className="flex flex-col items-center justify-center space-y-4">
-  {selectedDate && (
-    <div className="justify-center items-center flex">
-      <div className="bg-verde-claro rounded-md shadow-lg border-black border-2 py-1 px-1">
-        Fecha seleccionada: {new Date(selectedDate).toLocaleDateString()}
-      </div>
-    </div>
-  )}
-  <div className="flex items-center justify-center">
-    <input
-      type="text"
-      value={hotelName}
-      onChange={handleHotelNameChange}
-      placeholder="Nombre del hotel"
-      className="mt-2 p-2 rounded-lg border shadow-md"
-      required
-      minLength={5}
-      maxLength={15}
-    />
-  </div>
-  <div className="text-center text-small-bold">
-    el Pick-up desde el Hotel <br /> se coordinará por E-mail o
-    Whatsapp.
-  </div>
-</div>
+        <div className="flex flex-col items-center justify-center space-y-4">
+          {selectedDate && (
+            <div className="justify-center items-center flex">
+              <div className="bg-verde-claro rounded-md shadow-lg border-black border-2 py-1 px-1">
+                Fecha seleccionada:{" "}
+                {new Date(selectedDate).toLocaleDateString()}
+              </div>
+            </div>
+          )}
+          <div className="flex items-center justify-center">
+            <input
+              type="text"
+              value={hotelName}
+              onChange={handleHotelNameChange}
+              placeholder="Nombre del hotel"
+              className="mt-2 p-2 rounded-lg border shadow-md"
+              required
+              minLength={5}
+              maxLength={15}
+            />
+          </div>
+          <div className="text-center text-small-bold">
+            el Pick-up desde el Hotel <br /> se coordinará por E-mail o
+            Whatsapp.
+          </div>
+          <Alerta2 />
+        </div>
       </div>
     </div>
   );

@@ -95,7 +95,7 @@ const config: Config = {
         'amarillo': "#EDBC29",
         "verde-fuerte": "#47582D",
         "verde-claro": "#D9DB6E",
-        "azul": "#0b91a0",
+        "azul": "#156184",
         "azul-claro": "#4acddc"
       },
       fontFamily: {

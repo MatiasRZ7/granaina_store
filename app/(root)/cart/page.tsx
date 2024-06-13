@@ -32,7 +32,7 @@ const Cart = () => {
           customer,
           total: totalRounded,
         });
-        debugger; // Pause execution here
+        debugger;
         // get the response from the checkout API
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
           method: "POST",
@@ -88,26 +88,30 @@ const Cart = () => {
                       </p>
                     )}
                     <p className="text-small-medium">${cartItem.item.price}</p>
+                    <p className="text-small-medium">
+                      Lugar de recogida: {cartItem.hotelName}
+                    </p>
                   </div>
                 </div>
 
                 <div className="flex gap-4 items-center">
                   <MinusCircle
                     className="hover:text-red-1 cursor-pointer"
-                    onClick={() => cart.decreaseQuantity(cartItem.item._id)}
-                  />
-                  <p className="text-body-bold">{cartItem.quantity}</p>
-                  <PlusCircle
-                    className="hover:text-red-1 cursor-pointer"
-                    onClick={() => cart.increaseQuantity(cartItem.item._id)}
-                  />{" "}
-                  (Adultos)
-                  <MinusCircle
-                    className="hover:text-red-1 cursor-pointer"
                     onClick={() =>
-                      cart.decreaseChildrenQuantity(cartItem.item._id)
+                      cart.decreaseAdultQuantity(cartItem.item._id)
                     }
                   />
+                  <p className="text-body-bold">{cartItem.adultQuantity}</p>
+                  <PlusCircle
+                    className="hover:text-red-1 cursor-pointer"
+                    onClick={() =>
+                      cart.increaseAdultQuantity(cartItem.item._id)
+                    }
+                  />{" "}
+                  (Adultos)
+                  <MinusCircle className="hover:text-red-1 cursor-pointer"  onClick={() =>
+                      cart.decreaseChildrenQuantity(cartItem.item._id)
+                    } />
                   <p className="text-body-bold">{cartItem.childrenQuantity}</p>
                   <PlusCircle
                     className="hover:text-red-1 cursor-pointer"
@@ -135,8 +139,13 @@ const Cart = () => {
             cart.cartItems.length > 1 ? "items" : "item"
           })`}</span>
         </p>
-        <div className="flex justify-between text-body-semibold">
-          <span>Monto a pagar:</span>
+        <div className="flex justify-between text-body-semibold bg-amarillo rounded-lg shadow-lg m-1 p-2">
+          <div>
+            <span>Monto a pagar:</span>
+            <span className="text-small-bold block mt-1">
+              (Equivale al 50% de la reserva del Tour)
+            </span>
+          </div>
           <span>${totalRounded}</span>
         </div>
         <button
@@ -146,8 +155,8 @@ const Cart = () => {
         >
           Proceed to Checkout
         </button>
-        <div className="flex justify-between text-small-bold py-16">
-          <span>Se cobrará el 50% como concepto de reserva.</span>
+        <div className="flex justify-between text-small-bold py-2">
+          <span>El 50% restante se paga el dia del tour.</span>
         </div>
       </div>
     </div>

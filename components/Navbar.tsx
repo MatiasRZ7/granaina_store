@@ -21,11 +21,11 @@ const Navbar = () => {
     <div
       className={`${
         isProductPage ? "relative" : "sticky"
-      } top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-gradient-to-r from-amarillo to-verde-claro max-sm:px-2`}
+      } top-0 z-10 py-4 px-10 flex gap-2 justify-between items-center bg-gradient-to-l from-azul to-azul-claro max-sm:px-2`}
     >
       <Link href="/">
         <Image
-          src="/LOGO 3 (2).png"
+          src="/LOGO 3 blanco.png"
           alt="Logo Riviera maya tour"
           width={100}
           height={120}
@@ -34,22 +34,22 @@ const Navbar = () => {
       <div className="flex gap-4 text-base-bold max-lg:hidden">
         <Link
           href="/"
-          className={`hover:text-red-1 ${pathname === "/" && "text-red-1"}`}
+          className={`hover:text-white ${pathname === "/" && "text-white"}`}
         >
           Home
         </Link>
         <Link
           href={user ? "/wishlist" : "sign-in"}
-          className={`hover:text-red-1 ${
-            pathname === "/wishlist" && "text-red-1"
+          className={`hover:text-white ${
+            pathname === "/wishlist" && "text-white"
           }`}
         >
           Wishlist
         </Link>
         <Link
           href={user ? "/orders" : "/sign-in"}
-          className={`hover:text-red-1 ${
-            pathname === "/orders" && "text-red-1"
+          className={`hover:text-white ${
+            pathname === "/orders" && "text-white"
           }`}
         >
           Orders
@@ -58,7 +58,7 @@ const Navbar = () => {
 
       <div className="flex gap-3 border border-grey-2 px-3 py-1 items-center rounded-lg">
         <input
-          className="outline-none max-sm:max-w-[120px] bg-claro-crema rounded"
+          className="outline-none max-sm:max-w-[120px] bg-white rounded"
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -76,7 +76,7 @@ const Navbar = () => {
             setQuery("");
           }}
         >
-          <Search className="cursor-pointer h-4 w-4 hover:text-red-1" />
+          <Search className="cursor-pointer h-4 w-4 hover:text-white" />
         </button>
       </div>
 
@@ -100,18 +100,18 @@ const Navbar = () => {
             className="absolute flex flex-col gap-4 p-3 rounded-lg border bg-white
           text-base-bold top-12 right-5 lg:hidden"
           >
-            <Link href="/" className="hover:text-red-1">
+            <Link href="/" className="hover:text-white">
               Home
             </Link>
             <Link
               href={user ? "/wishlist" : "sign-in"}
-              className="hover:text-red-1"
+              className="hover:text-white"
             >
               Wishlist
             </Link>
             <Link
               href={user ? "/orders" : "/sign-in"}
-              className="hover:text-red-1"
+              className="hover:text-white"
             >
               Orders
             </Link>

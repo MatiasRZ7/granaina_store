@@ -12,6 +12,7 @@ interface CartItem {
   dateAdded: string;
   hotelName?: string;
   pickupTime?: string;
+  adultQuantity?: number;
 }
 
 // CartStore is the type of the store
@@ -23,6 +24,8 @@ interface CartStore {
   decreaseQuantity: (idToDecrease: string) => void;
   increaseChildrenQuantity: (idToIncrease: string) => void;
   decreaseChildrenQuantity: (idToDecrease: string) => void;
+  increaseAdultQuantity: (idToIncrease: string) => void;
+  decreaseAdultQuantity: (idToDecrease: string) => void;
   clearCart: () => void;
   getTotal: () => number;
 }
@@ -33,8 +36,7 @@ const useCart = create(
       cartItems: [], // initial value of the cart
       // function to add an item to the cart with the initial value of the cart
       addItem: (data: CartItem) => {
-        const { item, quantity, childrenQuantity, color, size, dateAdded, hotelName, pickupTime } = data;
-        console.log('Adding item to cart:', data);
+        const { item, quantity, childrenQuantity, adultQuantity, color, size, dateAdded, hotelName, pickupTime } = data;
         const currentItems = get().cartItems; // get the current items in the cart
         const isExisting = currentItems.find(
           (cartItem) => cartItem.item._id === item._id
@@ -48,6 +50,7 @@ const useCart = create(
           quantity,
           color,
           childrenQuantity,
+          adultQuantity,
           size,
           dateAdded,
           hotelName,
@@ -121,13 +124,31 @@ const useCart = create(
         set({ cartItems: newCartItems.filter(item => item.quantity > 0 || (item.childrenQuantity || 0) > 0) });
         toast.success("Children quantity decreased");
       },
+      increaseAdultQuantity: (idToIncrease: String) => {
+        const newCartItems = get().cartItems.map((cartItem) =>
+          cartItem.item._id === idToIncrease
+            ? { ...cartItem, adultQuantity: (cartItem.adultQuantity || 0) + 1 }
+            : cartItem
+        );
+        set({ cartItems: newCartItems });
+        toast.success("Adult quantity increased");
+      },
+      decreaseAdultQuantity: (idToDecrease: String) => {
+        const newCartItems = get().cartItems.map((cartItem) =>
+          cartItem.item._id === idToDecrease
+            ? { ...cartItem, adultQuantity: Math.max(0, (cartItem.adultQuantity || 0) - 1) }
+            : cartItem
+        );
+        set({ cartItems: newCartItems.filter(item => item.quantity > 0 || (item.childrenQuantity || 0) > 0 || (item.adultQuantity || 0) > 0) });
+        toast.success("Adult quantity decreased");
+      },
       // clear the cart
       clearCart: () => {
         set({ cartItems: [] });
       },
       getTotal: () => {
         return get().cartItems.reduce(
-          (acc, cartItem) => acc + cartItem.item.price * cartItem.quantity + (cartItem.childrenQuantity || 0) * (cartItem.item.price - 10),
+          (acc, cartItem) => acc + cartItem.item.price * (cartItem.adultQuantity || 0) + (cartItem.childrenQuantity || 0) * (cartItem.item.price - 10),
           0
         );
       },

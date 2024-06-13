@@ -21,6 +21,10 @@ type ProductType = {
   updatedAt: string;
   metadata: {
     dateAdded: string;
+    hotelName: string;
+    pickupTime: string;
+    childrenQuantity: number;
+    adultQuantity: number;
   };
 };
 
@@ -37,11 +41,19 @@ type OrderType = {
   products: [OrderItemType];
   shippingRate: string;
   totalAmount: number;
+  dateAdded: string;
+  hotelName: string;
+  childrenQuantity: number;
+  adultQuantity: number;
 };
 type OrderItemType = {
   product: ProductType;
+  dateAdded: string;
+  hotelName: string;
   color: string;
   size: string;
   quantity: number;
   _id: string;
+  childrenQuantity: number;
+  adultQuantity: number;
 };
