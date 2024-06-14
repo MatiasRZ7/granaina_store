@@ -11,13 +11,15 @@ const SuccessfulPayment = () => {
   }, []);
   return (
     <div className="h-screen flex flex-col justify-center items-center gap-5">
-      <p className="text-heading4-bold text-red-1">Successful Payment </p>
-      <p>Thank you for your purchase</p>
+      <p className="text-heading4-bold text-red-1">Pago efectuado correctamente.</p>
+      <p>Muchas gracias por su compra</p>
+      <p> Puede ver su orden  <Link className="text-red-1" href="/orders">aqui</Link></p>
+      <p>Un agente se pondrá en contacto con usted en breve.</p>
       <Link
         href="/"
         className="p-4 border text-base-bold hover:bg-black hover:text-white"
       >
-        CONTINUE TO SHOPPING
+        IR A LA PÁGINA PRINCIPAL
       </Link>
     </div>
   );
