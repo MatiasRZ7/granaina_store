@@ -23,18 +23,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logofav.ico" />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
-          strategy="afterInteractive"
-        />
-        <Script strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.GOOGLE_ANALYTICS}');
-          `}
-        </Script>
       </head>
       <body className={inter.className}>
         <ClerkProvider>
