@@ -47,7 +47,7 @@ export default function Footer() {
               >
                 <div className="flex justify-center items-center gap-16 sm:gap-4 md:gap-20">
                   <div className="w-8 h-8 flex items-center justify-center">
-                    <FontAwesomeIcon icon={faWhatsapp} />
+                    <FontAwesomeIcon icon={faWhatsapp} style={{ width: '100%', height: 'auto' }} />
                   </div>
                 </div>
               </a>
@@ -60,7 +60,7 @@ export default function Footer() {
               >
                 <div className="flex justify-center items-center gap-16 sm:gap-4 md:gap-20">
                   <div className="w-8 h-8 flex items-center justify-center">
-                    <FontAwesomeIcon icon={faEnvelope} />
+                    <FontAwesomeIcon icon={faEnvelope} style={{ width: '100%', height: 'auto' }} />
                   </div>
                 </div>
               </a>
@@ -72,7 +72,7 @@ export default function Footer() {
                 className="hover:text-gray-400 flex sm:flex-col md:flex-row justify-between w-full items-center flex-col"
               >
                 <div className="w-8 h-8 flex items-center justify-center">
-                  <FontAwesomeIcon icon={faInstagram} />
+                  <FontAwesomeIcon icon={faInstagram} style={{ width: '100%', height: 'auto' }} />
                 </div>
               </a>
               <a
@@ -83,7 +83,7 @@ export default function Footer() {
                 className="hover:text-gray-400 flex sm:flex-col md:flex-row justify-between w-full items-center flex-col"
               >
                 <div className="w-8 h-8 flex items-center justify-center">
-                  <FontAwesomeIcon icon={faTiktok} />
+                  <FontAwesomeIcon icon={faTiktok} style={{ width: '100%', height: 'auto' }} />
                 </div>
               </a>
               <a
@@ -94,7 +94,7 @@ export default function Footer() {
                 className="hover:text-gray-400 flex sm:flex-col md:flex-row justify-between w-full items-center flex-col"
               >
                 <div className="w-8 h-8 flex items-center justify-center">
-                  <FontAwesomeIcon icon={faGoogle} />
+                  <FontAwesomeIcon icon={faGoogle} style={{ width: '100%', height: 'auto' }} />
                 </div>
               </a>
             </div>
