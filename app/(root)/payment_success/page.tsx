@@ -1,7 +1,8 @@
 "use client";
 import useCart from "@/lib/hooks/useCart";
 import Link from "next/link";
-import { use, useEffect } from "react";
+import { useEffect } from "react";
+import Script from "next/script";
 
 const SuccessfulPayment = () => {
   const cart = useCart();
@@ -11,9 +12,29 @@ const SuccessfulPayment = () => {
   }, []);
   return (
     <div className="h-screen flex flex-col justify-center items-center gap-5">
-      <p className="text-heading4-bold text-red-1">Pago efectuado correctamente.</p>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-16611348871"
+        strategy="afterInteractive"
+      />
+      <Script strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-16611348871');
+        `}
+      </Script>
+      <p className="text-heading4-bold text-red-1">
+        Pago efectuado correctamente.
+      </p>
       <p>Muchas gracias por su compra</p>
-      <p> Puede ver su orden  <Link className="text-red-1" href="/orders">aqui</Link></p>
+      <p>
+        {" "}
+        Puede ver su orden{" "}
+        <Link className="text-red-1" href="/orders">
+          aqui
+        </Link>
+      </p>
       <p>Un agente se pondrá en contacto con usted en breve.</p>
       <Link
         href="/"
