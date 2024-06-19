@@ -25,6 +25,28 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/logofav.ico" />
         <GoogleTagManager gtmId="GTM-PPZD4BQ5" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=AW-16611348871"
+        ></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'AW-16611348871');
+          `}
+        </script>
+        <script>
+          {`
+            gtag('event', 'conversion', {
+              'send_to': 'AW-16611348871/Mb92CKGl0LoZEIej9PA9',
+              'value': 1.0,
+              'currency': 'MXN',
+              'transaction_id': ''
+            });
+          `}
+        </script>
       </head>
       <body className={inter.className}>
         <noscript>
