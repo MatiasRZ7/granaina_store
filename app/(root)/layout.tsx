@@ -4,8 +4,6 @@ import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Navbar from "@/components/Navbar";
 import ToasterProvider from "@/lib/providers/ToasterProvider";
-import Script from "next/script";
-import { GoogleTagManager } from "@next/third-parties/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -26,14 +24,6 @@ export default function RootLayout({
         <link rel="icon" href="/logofav.ico" />
       </head>
       <body className={inter.className}>
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PPZD4BQ5"
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          ></iframe>
-        </noscript>
         <ClerkProvider>
           <ToasterProvider />
           <Navbar />
