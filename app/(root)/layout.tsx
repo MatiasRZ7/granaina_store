@@ -37,16 +37,6 @@ export default function RootLayout({
             gtag('config', 'AW-16611348871');
           `}
         </script>
-        <script>
-          {`
-            gtag('event', 'conversion', {
-              'send_to': 'AW-16611348871/Mb92CKGl0LoZEIej9PA9',
-              'value': 1.0,
-              'currency': 'MXN',
-              'transaction_id': ''
-            });
-          `}
-        </script>
       </head>
       <body className={inter.className}>
         <noscript>
