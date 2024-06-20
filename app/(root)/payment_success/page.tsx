@@ -4,6 +4,7 @@ import useCart from "@/lib/hooks/useCart";
 import Link from "next/link";
 import { useEffect } from "react";
 import { GoogleTagManager } from "@next/third-parties/google";
+import Script from "next/script";
 
 const SuccessfulPayment = () => {
   const cart = useCart();
@@ -15,19 +16,19 @@ const SuccessfulPayment = () => {
     <div className="h-screen flex flex-col justify-center items-center gap-5">
       <Head>
         <GoogleTagManager gtmId="AW-16611348871" />
-        <script
+        <Script
           async
           src="https://www.googletagmanager.com/gtag/js?id=AW-16611348871"
-        ></script>
-        <script>
+        ></Script>
+        <Script>
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'AW-16611348871');
           `}
-        </script>
-        <script>
+        </Script>
+        <Script>
           {`
             gtag('event', 'conversion', {
               'send_to': 'AW-16611348871/Mb92CKGl0LoZEIej9PA9',
@@ -36,7 +37,7 @@ const SuccessfulPayment = () => {
               'transaction_id': ''
             });
           `}
-        </script>
+        </Script>
       </Head>
       <p className="text-heading4-bold text-red-1">
         Pago efectuado correctamente.
