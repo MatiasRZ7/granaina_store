@@ -16,16 +16,16 @@ import {
         <AlertDialogTrigger className="border shadow-lg rounded-full hover:bg-azul "><BsFillInfoSquareFill size={45}/></AlertDialogTrigger>
         <AlertDialogContent className="bg-gray-300 text-black">
           <AlertDialogHeader>
-            <AlertDialogTitle>Informacion extra sobre los precios</AlertDialogTitle>
+            <AlertDialogTitle>Additional information on prices</AlertDialogTitle>
             <AlertDialogDescription>
-              Niños de 4 a 12 años pagan 10 USD menos que el precio adulto.
-              Niños de 0 a 3 años no pagan.
+            Children from 4 to 12 years old pay 10 USD less than the adult price.
+            Children from 0 to 3 years old do not pay.
               <br />
-              Para cualquier otra duda o consulta puedes contactarnos a traves de nuestro correo electronico o numero de telefono. 
+              For any other questions or queries you can contact us via email or phone number.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="hover:text-azul">Cerrar</AlertDialogCancel>
+            <AlertDialogCancel className="hover:text-azul">Close</AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
