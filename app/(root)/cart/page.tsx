@@ -1,19 +1,18 @@
 "use client";
-import React from "react";
+import React, { useContext } from "react";
 import useCart from "@/lib/hooks/useCart";
 import Image from "next/image";
 import { MinusCircle, PlusCircle, Trash } from "lucide-react";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { LanguageContext } from "@/lib/languageContext";
 
 const Cart = () => {
   const router = useRouter();
   const { user } = useUser();
   const cart = useCart();
   const total = cart.getTotal();
-  // calculate 50% of the total
   const totalfiftyPercent = total * 0.5;
-  // round the subtotal to 2 decimal places
   const totalRounded = parseFloat(totalfiftyPercent.toFixed(2));
   const customer = {
     clerkId: user?.id,
@@ -21,9 +20,10 @@ const Cart = () => {
     name: user?.fullName,
   };
 
+  const { language } = useContext(LanguageContext);
+
   const handleCheckout = async () => {
     try {
-      // if the user is not signed in, redirect to the sign-in page
       if (!user) {
         router.push("/sign-in");
       } else {
@@ -32,7 +32,6 @@ const Cart = () => {
           customer,
           total: totalRounded,
         });
-        // get the response from the checkout API
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/checkout`, {
           method: "POST",
           body: JSON.stringify({
@@ -52,10 +51,14 @@ const Cart = () => {
   return (
     <div className="flex gap-20 py-36 px-10 max-lg:flex-col">
       <div className="w-2/3 max-lg:w-full">
-        <p className="text-heading3-bold">Shopping Cart</p>
+        <p className="text-heading3-bold">
+          {language === "es" ? "Carrito de Compras" : "Shopping Cart"}
+        </p>
         <hr className="my-6" />
         {cart.cartItems.length === 0 ? (
-          <p className="text-body-bold">No item in cart</p>
+          <p className="text-body-bold">
+            {language === "es" ? "No hay artículos en el carrito" : "No item in cart"}
+          </p>
         ) : (
           <div>
             {cart.cartItems.map((cartItem) => (
@@ -82,13 +85,13 @@ const Cart = () => {
                     )}
                     {cartItem.dateAdded && (
                       <p className="text-small-medium">
-                        Tour el dia:{" "}
+                        {language === "es" ? "Tour el dia:" : "Tour on:"}{" "}
                         {new Date(cartItem.dateAdded).toLocaleDateString()}
                       </p>
                     )}
                     <p className="text-small-medium">${cartItem.item.price}</p>
                     <p className="text-small-medium">
-                      Lugar de recogida: {cartItem.hotelName}
+                      {language === "es" ? "Lugar de recogida:" : "Pickup location:"} {cartItem.hotelName}
                     </p>
                   </div>
                 </div>
@@ -107,7 +110,7 @@ const Cart = () => {
                       cart.increaseAdultQuantity(cartItem.item._id)
                     }
                   />{" "}
-                  (Adultos)
+                  {language === "es" ? "(Adultos)" : "(Adults)"}
                   <MinusCircle className="hover:text-red-1 cursor-pointer"  onClick={() =>
                       cart.decreaseChildrenQuantity(cartItem.item._id)
                     } />
@@ -118,7 +121,7 @@ const Cart = () => {
                       cart.increaseChildrenQuantity(cartItem.item._id)
                     }
                   />{" "}
-                  (Niños)
+                  {language === "es" ? "(Niños)" : "(Children)"}
                 </div>
 
                 <Trash
@@ -133,16 +136,16 @@ const Cart = () => {
 
       <div className="w-1/3 max-lg:w-full flex flex-col gap-8 bg-verde-claro rounded-lg px-4 py-5">
         <p className="text-heading4-bold pb-4">
-          Summary{" "}
+          {language === "es" ? "Resumen" : "Summary"}{" "}
           <span>{`(${cart.cartItems.length} ${
-            cart.cartItems.length > 1 ? "items" : "item"
+            cart.cartItems.length > 1 ? (language === "es" ? "artículos" : "items") : (language === "es" ? "artículo" : "item")
           })`}</span>
         </p>
         <div className="flex justify-between text-body-semibold bg-amarillo rounded-lg shadow-lg m-1 p-2">
           <div>
-            <span>Monto a pagar:</span>
+            <span>{language === "es" ? "Monto a pagar:" : "Amount to pay:"}</span>
             <span className="text-small-bold block mt-1">
-              (Equivale al 50% de la reserva del Tour)
+              {language === "es" ? "(Equivale al 50% de la reserva del Tour)" : "(Equivalent to 50% of the tour reservation)"}
             </span>
           </div>
           <span>${totalRounded}</span>
@@ -152,10 +155,10 @@ const Cart = () => {
          hover:bg-verde-fuerte hover:text-white transition-all duration-300 ease-in-out"
           onClick={handleCheckout}
         >
-          Proceed to Checkout
+          {language === "es" ? "Proceder al Pago" : "Proceed to Checkout"}
         </button>
         <div className="flex justify-between text-small-bold py-2">
-          <span>El 50% restante se paga el dia del tour.</span>
+          <span>{language === "es" ? "El 50% restante se paga el dia del tour." : "The remaining 50% is paid on the day of the tour."}</span>
         </div>
       </div>
     </div>

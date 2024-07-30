@@ -7,8 +7,10 @@ import useCart from "@/lib/hooks/useCart";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Alerta2 from "./Alerta2";
+import { useLanguage } from "@/lib/languageContext";
 
 const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
+  const { language, toggleLanguage } = useLanguage(); // Utiliza el contexto de lenguaje
   const [showInfo, setShowInfo] = useState(false);
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -30,7 +32,11 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
     if (validatePickupTime(newTime)) {
       setPickupTime(newTime);
     } else {
-      toast.error("Elegir un horario de recogida válido, de 8:00 a 20:00.");
+      toast.error(
+        language === "es"
+          ? "Elegir un horario de recogida válido, de 8:00 a 20:00."
+          : "Choose a valid pickup time, from 8:00 to 20:00."
+      );
     }
   };
   const [childrenQuantity, setChildrenQuantity] = useState<number>(0);
@@ -65,19 +71,25 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
           <HeartFavorite product={productInfo} />
         </div>
         <div className="flex gap-2">
-          <p className="text-base-medium text-grey-2">Categoria:</p>
+          <p className="text-base-medium text-grey-2">
+            {language === "es" ? "Categoria:" : "Category:"}
+          </p>
           <p className="text-base-bold">{productInfo.category}</p>
         </div>
         <p className="text-heading3-bold">${productInfo.price}</p>
 
         <div className="flex flex-col gap-2">
-          <p className="text-base-medium text-grey-2">Descripcion:</p>
+          <p className="text-base-medium text-grey-2">
+            {language === "es" ? "Descripcion:" : "Description:"}
+          </p>
           <p className="text-small-medium">{productInfo.description}</p>
         </div>
 
         {productInfo.colors.length > 0 && (
           <div className="flex flex-col gap-2">
-            <p className="text-base-medium text-grey-2">Colors:</p>
+            <p className="text-base-medium text-grey-2">
+              {language === "es" ? "Colores:" : "Colors:"}
+            </p>
             <div className="flex gap-2 ">
               {productInfo.colors.map((color, index) => (
                 <p
@@ -96,7 +108,9 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
 
         {productInfo.sizes.length > 0 && (
           <div className="flex flex-col gap-2">
-            <p className="text-base-medium text-grey-2">Sizes:</p>
+            <p className="text-base-medium text-grey-2">
+              {language === "es" ? "Tallas:" : "Sizes:"}
+            </p>
             <div className="flex gap-2 ">
               {productInfo.sizes.map((size, index) => (
                 <p
@@ -113,7 +127,9 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
           </div>
         )}
         <div className="flex gap-2 cursor-pointer">
-          <p className="text-base-medium text-grey-2">Adultos:</p>
+          <p className="text-base-medium text-grey-2">
+            {language === "es" ? "Adultos:" : "Adults:"}
+          </p>
           <div className="flex gap-4 items-center select-none">
             <MinusCircle
               className="hover:text-red-1 cursor-pointer"
@@ -133,7 +149,9 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
           onMouseEnter={() => setShowInfo(true)}
           onMouseLeave={() => setShowInfo(false)}
         >
-          <p className="text-base-medium text-grey-2">Niños: (4-12 años)</p>
+          <p className="text-base-medium text-grey-2">
+            {language === "es" ? "Niños: (4-12 años)" : "Children: (4-12 years)"}
+          </p>
           <div className="flex gap-4 items-center select-none">
             <MinusCircle
               className="hover:text-red-1 cursor-pointer"
@@ -172,12 +190,14 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
               }, 1000);
             } else {
               toast.error(
-                "Por favor, ingrese el nombre del hotel antes de agregar al carrito."
+                language === "es"
+                  ? "Por favor, ingrese el nombre del hotel antes de agregar al carrito."
+                  : "Please enter the hotel name before adding to the cart."
               );
             }
           }}
         >
-          Add to Cart
+          {language === "es" ? "Añadir al carrito" : "Add to Cart"}
         </button>
       </div>
       <div className="sm:ml-4 mb-2">
@@ -257,7 +277,7 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
           {selectedDate && (
             <div className="justify-center items-center flex">
               <div className="bg-verde-claro rounded-md shadow-lg border-black border-2 py-1 px-1">
-                Fecha seleccionada:{" "}
+                {language === "es" ? "Fecha seleccionada:" : "Selected Date:"}{" "}
                 {new Date(selectedDate).toLocaleDateString()}
               </div>
             </div>
@@ -267,7 +287,9 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
               type="text"
               value={hotelName}
               onChange={handleHotelNameChange}
-              placeholder="Nombre del hotel"
+              placeholder={
+                language === "es" ? "Nombre del hotel" : "Hotel name"
+              }
               className="mt-2 p-2 rounded-lg border shadow-md"
               required
               minLength={5}
@@ -275,8 +297,9 @@ const ProductInfo = ({ productInfo }: { productInfo: ProductType }) => {
             />
           </div>
           <div className="text-center text-small-bold">
-            el Pick-up desde el Hotel <br /> se coordinará por E-mail o
-            Whatsapp.
+            {language === "es"
+              ? "El Pick-up desde el Hotel se coordinará por E-mail o Whatsapp."
+              : "The hotel pick-up will be coordinated by email or Whatsapp."}
           </div>
           <Alerta2 />
         </div>

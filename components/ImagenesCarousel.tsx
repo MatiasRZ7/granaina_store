@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -6,14 +7,23 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Image from "next/image";
+import { LanguageContext } from "@/lib/languageContext";
 
 const ImagenesCarousel = () => {
-  const images = [
+  const { language } = useContext(LanguageContext);
+
+  const images = language === 'es' ? [
     { src: "/icono 1.png", alt: "comprometidos con el turismo sostenible" },
     { src: "/icono 2.png", alt: "experiencias y traslados" },
     { src: "/icono 3.png", alt: "grupos pequeños" },
     { src: "/icono 4.png", alt: "calidad y precios insuperables" },
     { src: "/icono 5.png", alt: "vive experiencias sin preocupaciones" },
+  ] : [
+    { src: "/icono1eng.png", alt: "committed to sustainable tourism" },
+    { src: "/icono2eng.png", alt: "experiences and transfers" },
+    { src: "/icono3eng.png", alt: "small groups" },
+    { src: "/icono4eng.png", alt: "unbeatable quality and prices" },
+    { src: "/icono5eng.png", alt: "live worry-free experiences" },
   ];
 
   return (
