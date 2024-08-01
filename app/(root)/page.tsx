@@ -19,7 +19,7 @@ const MainPage = () => {
           alt="RivieraTexto"
           height={800}
           width={1350}
-          className="z-0 shadow-lg border"
+          className="z-0 shadow-lg border transform transition duration-1000 hover:scale-95"
         />
       </div>
       <Footer />
