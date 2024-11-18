@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest) => {
     const { userId } = auth();
 
     if (!userId) {
-      return new NextResponse("Unauthorized", { status: 401 });
+      return new NextResponse("Not Authorized!", { status: 401 });
     }
     // connect to the database
     await connectToDB();
